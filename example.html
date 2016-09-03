@@ -8,7 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
+    <link rel="icon" href="favicon.png">
 
     <title>Js Expandable Tree</title>
 
@@ -30,7 +30,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Js Expandable Tree</a>
+          <a class="navbar-brand" href="#"><img src="brand.png">Js Expandable Tree</a>
+        </div>
+
+        <div class="navbar-form navbar-right">
+            <a type="submit" class="btn btn-success">Скачать</a>
         </div>
       </div>
     </nav>
@@ -38,15 +42,15 @@
     <div class="container main">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-6">
           <h2>Tree</h2>
           <div id="example"></div>
           <p><a class="btn btn-primary" id="save" href="#" role="button">Save &raquo;</a></p>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <h2>Json Export</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <pre class="text-danger"><code id="json-export" data-lang="json"></code></pre>
+
         </div>
       </div>
 
@@ -64,38 +68,58 @@
 
 	<script src="dist/js-expandable-tree.js"></script>  
 	<script type="text/javascript">
-		var jsonTree = [
-			  {
-			    "id": "1",
-			    "title": "Шампуни",
-			    "parent_id": "0",
-			    "nodes": [
-			      {
-			        "id": "3",
-			        "title": "Для головы",
-			        "parent_id": "1"
-			      },
-			      {
-			        "id": "4",
-			        "title": "Для других частей",
-			        "parent_id": "1"
-			      }
-			    ]
-			  },
-			  {
-			    "id": "6",
-			    "title": "Лаки",
-			    "parent_id": "0"
-			  }
-		];
+		var jsonTree =  [
+				  {
+				    "id": "1",
+				    "title": "Классификация",
+				    "nodes": [
+				      {
+				        "id": "3",
+				        "title": "Царство растений",
+				        "nodes": [
+				          {
+				            "title": "Водоросли",
+				            "id": 14
+				          },
+				          {
+				            "title": "Высшие растения",
+				            "id": 15,
+				            "nodes": [
+				              {
+				                "title": "Споровые",
+				                "id": 16
+				              },
+				              {
+				                "title": "Семенные",
+				                "id": 17
+				              }
+				            ]
+				          }
+				        ]
+				      },
+				      {
+				        "id": "4",
+				        "title": "Царство грибов",
+				      },
+				      {
+				        "title": "Царство бактерий",
+				        "id": 13
+				      }
+				    ]
+				  }
+				];
 
 		var form = jsExpandableTree({
 				jsonTree: jsonTree,
 				wrapper: '#example',
 			});
+
+		$('#json-export').html('');
+		$('#json-export').html(JSON.stringify(form.getToSave(), null, 2).replace('', ' '));
+		
 		$('#save').on('click', function() {
 			if (form.validateMe()) {
-				console.log('Bingo');
+				$('#json-export').html(JSON.stringify(form.getToSave(), null, 2).replace('', ' '));
 			}
 		})
 	</script>  

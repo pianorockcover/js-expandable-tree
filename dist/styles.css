@@ -32,16 +32,26 @@
 	text-decoration: none;
 }
 
+.js-expandable-tree .addSubGroup {
+	padding-bottom: 2px;
+	border-bottom: 1px dashed;
+}
+
+.js-expandable-tree .addSubGroup:hover {
+	border-bottom: 1px dashed transparent;
+}
+
 .js-expandable-tree ul:first-child {
 	padding-left: 0px;
 }
 
 .js-expandable-tree .plus {
-	margin-left: 10px;
+	margin-left: 13px;
+	margin-top: 5px;
 }
 
 .js-expandable-tree ul[data-group]:not(:first-child) {
-    margin-left: 20px;
+    margin-left: 18px;
     padding-left: 19px;
     border-left: 1px solid #cacaca;
 }
