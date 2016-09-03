@@ -1,0 +1,33 @@
+.js-expandable-tree li {
+	list-style: none;
+}
+
+.js-expandable-tree .changeTitle {
+	width: initial;
+}
+
+.js-expandable-tree .right-pad,
+.js-expandable-tree .wrapper,
+.js-expandable-tree .form-control {
+	display: inline-block;
+}
+
+.js-expandable-tree .wrapper {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.js-expandable-tree .form-control {
+	margin-right: 10px;
+}
+
+.js-expandable-tree .remove {
+	margin-right: 10px;
+}
+
+.js-expandable-tree .addSubGroup,
+.js-expandable-tree .remove,
+.js-expandable-tree .plus {
+	cursor: pointer;
+	text-decoration: none;
+}
