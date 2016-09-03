@@ -31,3 +31,17 @@
 	cursor: pointer;
 	text-decoration: none;
 }
+
+.js-expandable-tree ul:first-child {
+	padding-left: 0px;
+}
+
+.js-expandable-tree .plus {
+	margin-left: 10px;
+}
+
+.js-expandable-tree ul[data-group]:not(:first-child) {
+    margin-left: 20px;
+    padding-left: 19px;
+    border-left: 1px solid #cacaca;
+}

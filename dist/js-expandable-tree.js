@@ -1,9 +1,7 @@
 var jsExpandableTree = function(params) {
-	var jsonTree = params.jsonTree;
-	var wrapper = params.wrapper;
     var th = this;
-    th.tree = jsonTree;
-    th.wrapper = wrapper;
+    th.tree = params.jsonTree;
+    th.wrapper = params.wrapper;
     th.maxId = 0;
 
     $(wrapper).addClass('js-expandable-tree');
@@ -88,10 +86,6 @@ var jsExpandableTree = function(params) {
     };
 
     th.removeGroup = function(group) {
-        // console.log($('.tooltip[data-group=' + group.id + ']'));
-        // if ($('.tooltip[data-group=' + group.id + ']').length != 0) {
-        //     $('.tooltip[data-group=' + group.id + ']').tooltip('hide');
-        // }
         group.deleted = true;
         th.renderContent();
     };
@@ -135,27 +129,7 @@ var jsExpandableTree = function(params) {
             }
         });
 
-        // th.updateCookie();
         th.addEventListeners();
-    };
-
-    th.updateCookie = function() {
-        $.cookie('nomenclature-groups', JSON.stringify(th.tree), {
-            expires: 360,
-        });
-    };
-
-    th.getFromCookie = function() {
-        var cookieVar = $.cookie('nomenclature-groups');
-        if (cookieVar === undefined) {
-            return;
-        }
-        
-        if (cookieVar != '') {
-            th.tree = $.parseJSON(unescape(cookieVar));
-        } else {
-            console.log('Включите cookie!');
-        }
     };
 
     th.getToSave = function() {
@@ -164,22 +138,25 @@ var jsExpandableTree = function(params) {
 
     th.validateMe = function(tree) {
         var errors = true;
-        var elems = $($(th.wrapper).selector + ' input[data-group]');
-        _.each(elems, function(elem) {  
+        var elems = $(wrapper + ' input[data-group]');
+        _.each(elems, function(elem) {
             if ($(elem).val() == '') {
-                addError($(elem), 'Это поле не может быть пустым', false);
+		    	console.log('Here');  
+            	$(elem).attr({
+			    	'title': 'Это поле не может быть пустым',
+			    	'data-toggle': 'tooltip',
+			    	'data-trigger': 'manual',
+			    	'data-placement': 'top',
+			    });
+			    $(elem).tooltip('show');
                 errors = false;
-            } else if (isHasError($(elem))) {
-                removeError($(elem));
             }
         });
 
         return errors;
     };  
 
-    // th.getFromCookie();
     th.renderContent();
-    // console.log(th.maxId);
 
     return th;
 };
